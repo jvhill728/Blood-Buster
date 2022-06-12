@@ -1,7 +1,7 @@
 export {}
 const Client = require('pg');
 
-const DB_NAME = 'ScareBuster';
+const DB_NAME = 'ScareBuster-dev';
 
 const DB_URL = 
     process.env.DATABASE_URL || `postgres:localhost:5432/${DB_NAME}`;
