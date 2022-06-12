@@ -1,3 +1,5 @@
+export {}
+
 require('dotenv').config();
 const express = require('express');
 const server = express();
@@ -15,7 +17,7 @@ server.use(express.static(path.join(__dirname, 'build')));
 
 server.use('/api', require('./api'))
 
-const client = require('./db');
+const  client  = require('./db');
 
 const handle = server.listen(PORT, async () => {
     console.log(`Server is running on ${PORT}!`);
@@ -28,4 +30,4 @@ const handle = server.listen(PORT, async () => {
     }
 });
 
-module.exporets = { server, handle };
+module.exports = { server, handle };
