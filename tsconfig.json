@@ -5,10 +5,10 @@
         "outDir": "dist",
         "sourceMap": true,
         "strict": true,
-        "target": "ES2015",
-        "alwaysAddExport": true
+        "target": "ES2015"
     },
     "include": [
         "src"
-    ]
+    ],
+    "alwaysAddExport": true
 }
