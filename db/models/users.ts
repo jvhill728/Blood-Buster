@@ -82,6 +82,15 @@ const getUser = async ( username, password) => {
     }
 }
 
+const getUserById = async (id) => {
+    const { rows: [user]} = await client.query(`
+    SELECT * FROM users
+    where id = $1
+    `, [id]);
+
+    return user
+}
+
 
 
 
@@ -91,5 +100,6 @@ module.exports = {
     createUser,
     getAllUsers,
     getUserByUsername,
-    getUser
+    getUser,
+    getUserById
 }
