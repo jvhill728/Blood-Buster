@@ -62,10 +62,24 @@ const getUser = async ( username, password) => {
     console.log('password ===>', password)
 
     try {
-        const user = await getUserByUsername(username);
+        const user = await getUserByUsername(username)
+        console.log('this is the user function', user)
+        const hashedPassword = user.password;
+
+        const verifyPassword = await bcrypt.compare(password, hashedPassword)
+        console.log('PW', password)
+        console.log('HPW', hashedPassword)
+        console.log('VPW', verifyPassword)
+
+        if (verifyPassword) {
+            user.password = null
+            console.log('User after deleted password', user)
+
+            return user
+        }
+    } catch(error) {
+        throw error
     }
-
-
 }
 
 
@@ -76,5 +90,6 @@ const getUser = async ( username, password) => {
 module.exports = {
     createUser,
     getAllUsers,
-    getUserByUsername
+    getUserByUsername,
+    getUser
 }
