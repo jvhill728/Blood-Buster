@@ -20,11 +20,32 @@ const createUser = async ({username, password, isAdmin}) => {
     }
 }
 
+const getAllUsers = async () => {
+    try {
+        const { rows: users } = await client.query(`
+        SELECT *
+        FROM users
+        `)
+        
+        console.log('USER ===>', users)
+        let password = users.password;
+        if(password) {
+            password = null
+        }
+        console.log('these are our users', users)
+
+        return users
+    } catch(error) {
+        throw error
+    }
+}
+
 
 
 
 
 
 module.exports = {
-    createUser
+    createUser,
+    getAllUsers
 }
