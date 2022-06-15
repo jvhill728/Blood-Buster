@@ -29,6 +29,7 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "npm": "^8.12.2",
     "scripts": "^0.1.0"
   }
