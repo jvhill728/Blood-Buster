@@ -5,6 +5,8 @@ async function dropTables() {
 
     try {
         await client.query(`
+        DROP TABLE IF EXISTS movie_tags;
+        DROP TABLE IF EXISTS tags;
         DROP TABLE IF EXISTS movies;
         DROP TABLE IF EXISTS users;
         `);
@@ -30,8 +32,23 @@ async function createTables() {
             CREATE TABLE movies (
                 id SERIAL PRIMARY KEY,
                 title VARCHAR(255) UNIQUE NOT NULL,
-                
-            )
-            `);
+                "releaseDate" INTEGER,
+                genre VARCHAR(255) NOT NULL
+            );
+            CREATE TABLE tags (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL
+            );
+            CREATE TABLE movie_tags (
+                "movieId" INTEGER REFERENCES movies(id),
+                "tagId" INTEGER REFERENCES tags(id),
+                UNIQUE ("movieId", "tagId")
+            );
+        `);
+
+        console.log('Finished building the tables!');
+    } catch (error) {
+        console.log('Error building tables!');
+        throw error;
     }
 }
