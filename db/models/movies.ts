@@ -19,7 +19,35 @@ const createMovie = async ({
     }
 }
 
+const getAllMovies = async () => {
+    try {
+        const { rows: movies } = await client.query(`
+        SELECT * 
+        FROM movies
+        `)
+
+        console.log('there are our spooooky movies!', movies)
+
+        return movies
+    } catch(error) {
+        throw error
+    }
+}    
+
+async function getMovieById(id) {
+    try {
+        const { rows: [movie] } = await client.query (`
+        SELECT * FROM movies WHERE id = ($1)
+        `, [id])
+
+        return movie;
+    } catch(error) {
+        throw error
+    }
+}
 
 module.exports = {
-    createMovie
+    createMovie,
+    getAllMovies,
+    getMovieById
 }
